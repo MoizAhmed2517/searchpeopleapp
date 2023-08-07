@@ -19,7 +19,7 @@ function Copyright(props) {
     return (
         <Stack direction="row" spacing={0.5} sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
             <Typography variant="body2" align="center" {...props} sx={{ color: '#fff', mt: 6 }}>{'Copyright © '}</Typography>
-            <Typography variant='subtitle2' align='center' sx={{ color:'#3399ff', fontWeight: 300, }} component={Link} to="/signup"> PeopleSearch</Typography>
+            <Typography variant='subtitle2' align='center' sx={{ color:'#3399ff', fontWeight: 300, }} component={Link} to="/"> PeopleSearch</Typography>
             <Typography variant="body2" align="center" {...props} sx={{ color: '#fff', mt: 6 }}>{new Date().getFullYear()}</Typography>
         </Stack>
     );
