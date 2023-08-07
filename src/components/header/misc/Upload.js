@@ -2,7 +2,17 @@ import React from 'react'
 import { Typography, Button, Box } from '@mui/material'
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 
-const upload = () => {
+const upload = ({ onFileUpload }) => {
+
+    const handleFileUpload = (event) => {
+        const files = event.target.files;
+        let fileList = [];
+        for (let i = 0; i < files.length; i++) {
+            fileList.push(files[i]);
+        }
+        onFileUpload(fileList);
+    }
+
   return (
     <Box
     sx={{
@@ -31,7 +41,7 @@ const upload = () => {
             }}
         >
             <Typography variant='h6' sx={{ textTransform: 'capitalize', mt: 0.3, textAlign: 'left', color: '#b0b8c4' }}>Upload documents</Typography>
-            <input hidden accept='image/*' type='file' />
+            <input hidden accept='image/*, application/pdf' multiple type='file' onChange={handleFileUpload} />
         </Button>
     </Box>
   )

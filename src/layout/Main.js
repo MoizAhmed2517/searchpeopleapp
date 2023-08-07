@@ -1,11 +1,24 @@
-import { Container, Grid, Typography, Box, Button, Stack } from '@mui/material'
-import React from 'react'
+import { Container, Grid, Typography, Box, Button, Stack, Chip, ListItem, Paper } from '@mui/material'
+import React, { useState } from 'react'
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import Upload from '../components/header/misc/Upload';
 import DownloadButton from '../components/header/misc/DownloadButton';
-
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const Main = () => {
+
+  const [file, setFile] = useState(null);
+  const [chipData, setChipData] = React.useState([]);
+
+  const handleFileUpload = (file) => {
+    setFile(file)
+  }
+
+  const handleDelete = (chipToDelete) => () => {
+    setFile((chips) => chips.filter((chip) => chip.name !== chipToDelete.name));
+  };
+
+
   return (
     <Container maxWidth="lg" sx={{ mt: 0, height: '80vh', display: 'flex', flexDirection: 'column' }}>
         <Grid container spacing={2} sx={{ flex: '1' }}>
@@ -47,7 +60,6 @@ const Main = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-
                 <Box 
                     sx={{ 
                         display: 'flex', 
@@ -59,9 +71,10 @@ const Main = () => {
                     }}
                 >   
                     <Typography variant='h6'sx={{ mb: 1.5, color: '#b0b8c4', fontStyle: 'italic', fontWeight: '300' }}>
-                        Are you looking to search for people data?
+                        Are you searching for people's data?
                     </Typography>
-                    <Upload />
+
+                    <Upload onFileUpload={handleFileUpload} />
 
                     <Stack direction="row" sx={{ mt: 2 }} spacing={1}>
                         <Typography variant='subtitle1'sx={{ mt: '5px !important', mr: '3px !important', color: '#b0b8c4', fontStyle: 'italic', fontWeight: '300' }}>
@@ -70,14 +83,44 @@ const Main = () => {
                         <DownloadButton fieldName=".csv" />
                         <DownloadButton fieldName=".xlsx" />
                         <DownloadButton fieldName=".json" />
-                        <DownloadButton fieldName=".db" />
+                        <DownloadButton fieldName=".txt" />
 
                     </Stack>
 
-                </Box>
-                
-            </Grid>
+                    {
+                        file !== null && file !== 0 
+                        ? 
+                        <Paper
+                            sx={{
+                                boxShadow: 'none',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexWrap: 'wrap',
+                                listStyle: 'none',
+                                p: '10px',
+                                mt: 2,
+                                background: '#141a1f'
+                            }}
+                            component="ul"
+                            >
+                            {file.map((data, index) => {
+                                return (
+                                    <Stack key={index} direction="row" spacing={2}>
+                                        <Chip
+                                        label={data.name}
+                                        onDelete={handleDelete(data)}
+                                        sx={{ color: '#fff', border: '1px solid #fff' }}
+                                        deleteIcon={<CancelIcon style={{ color: '#fff' }} />}
+                                        />
+                                    </Stack>
+                                );
+                            })}
+                        </Paper>
+                        : ""
+                    }
 
+                </Box>
+            </Grid>
         </Grid>
     </Container>
   )
