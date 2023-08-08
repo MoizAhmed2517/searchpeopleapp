@@ -1,8 +1,11 @@
 import React from 'react';
+
 // import profileImg from '../../static/images/profilepic.jpg'
 import { Link } from 'react-router-dom';
+
 // Icons
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 
 // Mui components
 import AppBar from '@mui/material/AppBar';
@@ -13,16 +16,42 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import PropTypes from 'prop-types';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+
+
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 const pages = ['Pricing', 'About Us', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
   
@@ -42,152 +71,156 @@ const Navbar = () => {
     };
   
     return (
-      <AppBar position="static" sx={{ background: '#101418', borderBottom: '0px solid #1e242c', boxShadow: 'inset 0px -1px 1px #1f262e' }}>
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            
-            {/* Desktop Navbar -- start */}
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, color: '#007fff' }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: '#007fff',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
-            {/* Desktop Navbar -- end */}
+      <>
+      <ElevationScroll {...props}>
+        <AppBar sx={{ background: '#101418', borderBottom: '0px solid #1e242c', boxShadow: 'inset 0px -1px 1px #1f262e' }}>
+          <Container maxWidth="lg">
+            <Toolbar disableGutters>
               
-            {/* Navigation menu desktop -- start */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
+              {/* Desktop Navbar -- start */}
+              <PsychologyIcon sx={{ display: { xs: 'none', md: 'flex' }, color: '#3399ff', mr: 1, mt: -0.5, height: 35, width: 35 }} />
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.15rem',
+                  color: '#3399ff',
+                  textDecoration: 'none',
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            {/* Navigation menu desktop -- end */}
-
-            {/* Responsive Navbar -- start */}
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, color: '#007fff' }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: '#007fff',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
-            {/* Responsive Navbar -- end */}
-
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                SCRUBWORX
+              </Typography>
+              {/* Desktop Navbar -- end */}
+                
+              {/* Navigation menu desktop -- start */}
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
                 >
-                  {<Typography variant='subtitle2' sx={{ textTransform: 'capitalize' }}>{page}</Typography>}
-                </Button>
-              ))}
-            </Box>
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                  }}
+                >
+                  {pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              {/* Navigation menu desktop -- end */}
 
-            {/* Profile Section -- Start */}
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Signup for premium access">
-                <Button sx={{ mt: 0.8, mr: 2, color: '#007fff' }} component={Link} to="/login">Log in</Button>
-                <Button 
-                    onClick={handleOpenUserMenu}
-                    startIcon={<GroupAddOutlinedIcon />} 
-                    sx={{ 
-                        boxShadow: '0px 2px 4px rgba(11, 13, 14, 0.8), inset 0px 4px 8px rgba(153, 204, 243, 0.4)',
-                        border: '1px solid #121010',
-                        borderRadius: '20px 20px',
-                        color: '#fff', 
-                        '&:hover': {color: 'white', background: '#007fff'} 
-                        }} 
-                    variant="contained" 
-                    component={Link} 
-                    to="/signup">
-                        <Typography variant='subtitle2' sx={{ textTransform: 'capitalize', mt: 0.3 }}>Sign up</Typography>
-                </Button>
-              </Tooltip>
-              {/* <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+              {/* Responsive Navbar -- start */}
+              <PsychologyIcon sx={{ display: { xs: 'flex', md: 'none' }, color: '#007fff' }} />
+              <Typography
+                variant="h5"
+                noWrap
+                component="a"
+                href=""
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', md: 'none' },
+                  flexGrow: 1,
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.15rem',
+                  color: '#007fff',
+                  textDecoration: 'none',
                 }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu> */}
-            </Box>
-            {/* Profile Section -- End */}
+                LOGO
+              </Typography>
+              {/* Responsive Navbar -- end */}
 
-          </Toolbar>
-        </Container>
-      </AppBar>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {<Typography variant='subtitle2' sx={{ textTransform: 'capitalize' }}>{page}</Typography>}
+                  </Button>
+                ))}
+              </Box>
+
+              {/* Profile Section -- Start */}
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Signup for premium access">
+                  <Button sx={{ mt: 0.8, mr: 2, color: '#007fff' }} component={Link} to="/login">Log in</Button>
+                  <Button 
+                      onClick={handleOpenUserMenu}
+                      startIcon={<GroupAddOutlinedIcon />} 
+                      sx={{ 
+                          boxShadow: '0px 2px 4px rgba(11, 13, 14, 0.8), inset 0px 4px 8px rgba(153, 204, 243, 0.4)',
+                          border: '1px solid #121010',
+                          borderRadius: '20px 20px',
+                          color: '#fff', 
+                          '&:hover': {color: 'white', background: '#007fff'} 
+                          }} 
+                      variant="contained" 
+                      component={Link} 
+                      to="/signup">
+                          <Typography variant='subtitle2' sx={{ textTransform: 'capitalize', mt: 0.3 }}>Sign up</Typography>
+                  </Button>
+                </Tooltip>
+                {/* <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu> */}
+              </Box>
+              {/* Profile Section -- End */}
+
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ElevationScroll>
+      </>
     );
 }
 

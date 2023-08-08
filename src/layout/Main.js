@@ -7,6 +7,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import ProgressBarLinear from '../components/header/misc/ProgressBarLinear';
 import './main.css';
 import DownloadIcon from '@mui/icons-material/Download';
+import Features from '../components/Features';
+import Advantages from '../components/Advantages';
+import Footer from '../components/Footer';
 
 const Main = () => {
 
@@ -30,9 +33,8 @@ const Main = () => {
             trigger === true && <ProgressBarLinear off={setTrigger} on={setDisabler} />
         }
 
-        <Container maxWidth="lg" sx={{ mt: 0, height: '80vh', display: 'flex', flexDirection: 'column' }}> 
+        <Container maxWidth="lg" sx={{ mt: 0, height: '100vh', display: 'flex', flexDirection: 'column' }}> 
             <Grid container spacing={2} sx={{ flex: '1' }}>
-
                 <Grid item xs={12} md={6}>
                     <Box 
                         sx={{ 
@@ -43,13 +45,12 @@ const Main = () => {
                             paddingRight: 9,
                         }}
                     >
-                        <Typography variant="h2" sx={{ fontWeight: 650, color: '#3399ff' }}>Search faster</Typography>
-                        <Typography variant="h2" sx={{ fontWeight: 800, color: "#fff" }}>with intuitive</Typography>
-                        <Typography variant="h2" sx={{ fontWeight: 800, color: "#fff" }}>Scraping AI tools</Typography>
+                        <Typography variant="h3" sx={{ fontWeight: 650, color: '#3399ff' }}>Welcome to Scrubworx!</Typography>
+                        <Typography variant="h4" sx={{ fontWeight: 700, color: "#fff", mt: 0.5 }}>Streamline Your Application Processing with Automation </Typography>
                         <Typography variant='body1'sx={{ mt: 1.5, color: '#b0b8c4' }}>
-                            App offers a comprehensive suite of free searching tools to help you collect new dataset faster. 
-                            Start with our app, we accept documents in the form of images, pdf, and you can request 
-                            any special format using our premium service.
+                        At Scrubworx, we understand the challenges of handling large volumes of applications. 
+                        That's why we've created a cutting-edge solution to automate and simplify the process. 
+                        From document upload to data extraction and compilation, Scrubworx has got you covered.
                         </Typography>
                         <Button
                             variant='contained'
@@ -80,8 +81,8 @@ const Main = () => {
                             alignItems: 'center'
                         }}
                     >   
-                        <Typography variant='h6'sx={{ mb: 1.5, color: '#b0b8c4', fontStyle: 'italic', fontWeight: '300' }}>
-                            Are you searching for people's data?
+                        <Typography variant='body1'sx={{ mb: 1.5, color: '#b0b8c4', fontStyle: 'italic', fontWeight: '300' }}>
+                            Ready to transform your application processing?
                         </Typography>
 
                         <Upload onFileUpload={handleFileUpload} />
@@ -149,6 +150,30 @@ const Main = () => {
                     </Box>
                 </Grid>
             </Grid>
+        </Container>
+
+        <Box sx={{ borderTop: '1px solid #1e242c', mt: 12 }} />
+        
+        <Container maxWidth="lg" sx={{ mt:2, height: '80vh', display: 'flex', flexDirection: 'column' }}>
+            <Grid container spacing={2} sx={{ flex: '2' }}>   
+                <Grid item xs={12}>
+                    <Features />
+                </Grid>
+            </Grid>
+        </Container>
+
+        <Box sx={{ borderTop: '1px solid #1e242c', mt: 2 }} />
+
+        <Container maxWidth="lg" sx={{ mt:2, height: '80vh', display: 'flex', flexDirection: 'column', mb: -9 }}>
+            <Grid container spacing={2} sx={{ flex: '2' }}>   
+                <Grid item xs={12}>
+                    <Advantages />
+                </Grid>
+            </Grid>
+        </Container>
+
+        <Container maxWidth="lg" sx={{ mt:1 , borderTop: '1px solid #1e242c' }} >
+            <Footer />
         </Container>
     
     </>

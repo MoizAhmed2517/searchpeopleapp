@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import { Link } from "react-router-dom";
 import { Stack } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -16,7 +16,7 @@ function Copyright(props) {
     return (
         <Stack direction="row" spacing={0.5} sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             <Typography variant="body2" align="center" {...props} sx={{ color: '#fff', mt: 6 }}>{'Copyright © '}</Typography>
-            <Typography variant='subtitle2' align='center' sx={{ color:'#3399ff', fontWeight: 300, }} component={Link} to="/"> PeopleSearch</Typography>
+            <Typography variant='subtitle2' align='center' sx={{ color:'#3399ff', fontWeight: 300, }} component={Link} to="/"> ScrubWorx</Typography>
             <Typography variant="body2" align="center" {...props} sx={{ color: '#fff', mt: 6 }}>{new Date().getFullYear()}</Typography>
         </Stack>
     );
@@ -49,11 +49,11 @@ const Signup = () => {
                         }}
                     >
                         <Box component={Link} to="/">
-                            <PsychologyAltOutlinedIcon sx={{ color: '#fff', width: 60, height: 60, mb: 1 }} />
+                            <PsychologyIcon sx={{ color: '#fff', width: 60, height: 60, mb: 1 }} />
                         </Box>
 
                         <Typography variant="h5" sx={{ color:'#fff', fontWeight: 300, }}>
-                            Sign up for PeopleSearch
+                            Sign up for ScrubWorx
                         </Typography>
 
                         <Box 
