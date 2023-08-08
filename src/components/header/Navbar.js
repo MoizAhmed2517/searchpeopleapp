@@ -156,7 +156,7 @@ const Navbar = () => {
                         }} 
                     variant="contained" 
                     component={Link} 
-                    to="/">
+                    to="/signup">
                         <Typography variant='subtitle2' sx={{ textTransform: 'capitalize', mt: 0.3 }}>Sign up</Typography>
                 </Button>
               </Tooltip>
